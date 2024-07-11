@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <a href="/">All Games</a> |
+        <a href="/moba">Moba Games</a> |
+        <a href="/add">Add New Game</a>
+    </div>
+    <h1>All Games</h1>
+    <a href="/?sort=asc">Sort By Name</a>
+    <div>
+        <form method="get" action="/">
+            <input placeholder="search here.." type="text" name="search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <br>
+    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Poster</th>
+                <th>Name</th>
+                <th>Release Date</th>
+                <th>Developer</th>
+                <th>Genre</th>
+                <th>Gameplay</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% games.forEach(el=> { %>
+                <tr>
+                    <td><img style="width: 50%;" src="<%=el.gameImg %>"></td>
+                    <td>
+                        <%= el.name %>
+                    </td>
+                    <td>
+                        <%= el.formatDate %>
+                    </td>
+                    <td>
+                        <%= el.developer %>
+                    </td>
+                    <td>
+                        <%= el.genre %>
+                    </td>
+                    <td>
+                        <%= el.gameplay() %>
+                    </td>
+                    <td>
+                        <a href="/<%= el.id %>">Detail</a>
+                        <a href="/<%= el.id %>/delete">Delete</a>
+                    </td>
+                </tr>
+                <%}) %>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
