@@ -1,5 +1,5 @@
 'use strict';
-const fs = require('fs')
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -12,11 +12,14 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    const games = JSON.parse(fs.readFileSync('./data/games.json', 'utf-8'))
-    games.forEach(el => {
-      delete el.id
-      el.createdAt = el.updatedAt = new Date()
+    const games = require('../data/games.json')
+
+    games.forEach((el) => {
+      delete el.id // jaga2 kalo ada id, jangan sampe masuk
+      el.createdAt = new Date() // tambahan untuk menyeseuaikan kolom default yang dibikin sama sequelize
+      el.updatedAt = new Date()
     })
+
     await queryInterface.bulkInsert('Games', games, {})
   },
 

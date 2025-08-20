@@ -1,19 +1,17 @@
 const express = require('express')
 const app = express()
 const port = 3000
-const Controller = require('./controllers/controller')
+const router = require('./routes')
 
+// template engine, default folder is 'views'
 app.set('view engine', 'ejs')
+
+// Middleware to parse data from html form
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', Controller.readGames)
-app.get('/moba', Controller.readMoba)
-app.get('/add', Controller.addGameForm)
-app.post('/add', Controller.addGame)
-app.get('/:id', Controller.detailGame)
-app.get('/:id/delete', Controller.deleteGame)
-
+// Middleware to use router
+app.use(router)
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Server is running at http://localhost:${port}`)
 })

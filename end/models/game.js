@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
 
-    static findMoba() { //static method
+    static findRPG() { //static method
       return Game.findAll({
         where: {
-          genre: 'MOBA'
+          genre: 'RPG'
         },
         attributes: {
           exclude: ['createdAt', 'updatedAt']
@@ -26,16 +26,19 @@ module.exports = (sequelize, DataTypes) => {
 
     gameplay() { // instance method
       if (this.genre == 'MOBA') {
-        return 'Tactical Multiplayer Online Battle Arena'
+        return '5v5 MOBA'
       } else if (this.genre == 'FPS') {
-        return 'Team Based First Person Shooter'
+        return '5v5 Tactical FPS'
+      } else if (this.genre === 'BR') {
+        return 'Battle Royale'
       } else {
-        return 'Player VS Player Fight in Battle Royale'
+        return `Open World RPG`
       }
     }
 
     get formatDate() { // getter
-      return this.releaseDate.toLocaleString('id')
+      const date = new Date(this.releaseDate)
+      return date.toISOString().split('T')[0]
     }
   }
   Game.init({

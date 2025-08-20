@@ -12,31 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
     }
-
-    static findMoba() { //static method
-      return Game.findAll({
-        where: {
-          genre: 'MOBA'
-        },
-        attributes: {
-          exclude: ['createdAt', 'updatedAt']
-        }
-      })
-    }
-
-    gameplay() { // instance method
-      if (this.genre == 'MOBA') {
-        return 'Tactical Multiplayer Online Battle Arena'
-      } else if (this.genre == 'FPS') {
-        return 'Team Based First Person Shooter'
-      } else {
-        return 'Player VS Player Fight in Battle Royale'
-      }
-    }
-
-    get formatDate() { // getter
-      return this.releaseDate.toLocaleString('id')
-    }
   }
   Game.init({
     name: DataTypes.STRING,
