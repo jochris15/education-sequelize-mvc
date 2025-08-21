@@ -6,5 +6,5 @@ const Controller = require('./controllers')
 app.get('/', Controller.read)
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Server listening on http://localhost:${port}`)
 })
